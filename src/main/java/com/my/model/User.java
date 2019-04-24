@@ -1,43 +1,43 @@
 package com.my.model;
 
 public class User {
-    private Integer userId;
+    private Integer uId;
 
-    private String userName;
+    private String email;
 
-    private String password;
+    private String lastName;
 
-    private String phone;
+    private Integer deptId;
 
-    public Integer getUserId() {
-        return userId;
+    public Integer getuId() {
+        return uId;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setuId(Integer uId) {
+        this.uId = uId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setEmail(String email) {
+        this.email = email == null ? null : email.trim();
     }
 
-    public String getPassword() {
-        return password;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPassword(String password) {
-        this.password = password == null ? null : password.trim();
+    public void setLastName(String lastName) {
+        this.lastName = lastName == null ? null : lastName.trim();
     }
 
-    public String getPhone() {
-        return phone;
+    public Integer getDeptId() {
+        return deptId;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone == null ? null : phone.trim();
+    public void setDeptId(Integer deptId) {
+        this.deptId = deptId;
     }
 }

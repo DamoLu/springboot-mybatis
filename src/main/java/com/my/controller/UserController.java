@@ -1,30 +1,24 @@
 package com.my.controller;
 
-import com.my.model.User;
-import com.my.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("user1")
+@RequestMapping("user")
 public class UserController {
 
-    @Autowired
-    private UserService userService;
+    @Value("${msg}")
+    private String msg;
 
     @GetMapping("/hi")
     public String hello() {
-        return "hello world";
+        return msg;
     }
 
     @GetMapping("insert")
     public void add() {
-        User user = new User();
-        user.setPassword("root");
-        user.setPhone("12356488");
-        user.setUserId(1);
-        user.setUserName("liming");
+
     }
 }
