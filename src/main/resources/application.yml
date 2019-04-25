@@ -11,12 +11,19 @@ spring:
 mybatis:
   mapper-locations: classpath*:mapping/*Mapper.xml
 
+#pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
 ---
 #当环境为dev时采用该配置
 spring:
   profiles: dev
 server:
   port: 8080
+
 msg: i am dev
 ---
 #当环境为prod时采用该配置
