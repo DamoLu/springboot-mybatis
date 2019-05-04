@@ -2,9 +2,11 @@ package com.my.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.my.exception.BusinessException;
-import com.my.mapper.UserMapper;
 import com.my.model.User;
 import com.my.model.UserExample;
+import com.my.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -13,10 +15,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("user")
-public class UserController extends Throwable{
+public class UserController{
+
+    Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
-    UserMapper userMapper;
+    private UserService userService;
 
     @Value("${msg}")
     private String msg;
@@ -33,15 +37,15 @@ public class UserController extends Throwable{
         user.setUserId(id);
         user.setPhone("13546897545");
         user.setPassword("123456");
-        userMapper.insert(user);
+        userService.insert(user);
     }
 
-    @GetMapping("find")
+    @GetMapping("find/{id}")
     @ResponseBody
-    public User findById(@RequestParam("id") Integer id) {
-        User user = userMapper.selectByPrimaryKey(id);
+    public User findById(@PathVariable("id") Integer id) {
+        User user = userService.selectByPrimaryKey(id);
         if (null == user) {
-           throw new BusinessException("404", "没有此用户");
+            throw new BusinessException("404","无此用户");
         }
         return user;
     }
@@ -52,7 +56,7 @@ public class UserController extends Throwable{
         PageHelper.startPage(pageNum, pageSize);
         UserExample userExample = new UserExample();
         userExample.createCriteria().andUserIdBetween(1, 3);
-        List<User> users = userMapper.selectByExample(userExample);
+        List<User> users = userService.selectByExample(userExample);
         return users;
     }
 }

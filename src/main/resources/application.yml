@@ -4,12 +4,26 @@ spring:
     active: dev
 
   datasource:
-    url: jdbc:mysql://localhost/mytest?serverTimezone=Hongkong
-    username: root
-    password: root
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    master:
+      url: jdbc:mysql://192.168.0.4/mytest?serverTimezone=Hongkong
+      username: root
+      password: root
+      initialSize: 5
+      maxActive: 6
+      filters: stat,wall
+    slave:
+      url: jdbc:mysql://192.168.0.5/mytest?serverTimezone=Hongkong
+      username: root
+      password: root
+      initialSize: 5
+      maxActive: 6
+    # 配置监控统计拦截的filters，去掉后监控界面sql无法统计，'wall'用于防火墙
+      filters: stat,wall
 mybatis:
   mapper-locations: classpath*:mapping/*Mapper.xml
+  type-aliases-package: com.my.model
+  configuration:
+    map-underscore-to-camel-case: true
 
 #pagehelper分页插件
 pagehelper:
